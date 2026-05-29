@@ -107,27 +107,31 @@ Thị trường đã có các pattern rõ cho automated QA trong contact center:
 
 
 ```text
-CURRENT STATE — QA cuộc gọi CSKH thủ công
+CURRENT STATE — 6 bước, ~55 phút / 1 cuộc gọi được QA
 
-[Hệ thống phát sinh nhiều cuộc gọi CSKH mỗi ngày]
-        |
-        v
-[QA / supervisor chọn một mẫu rất nhỏ để nghe lại]
-        |
-        v
-[Mở từng file ghi âm và nghe gần như toàn bộ cuộc gọi]
-        |
-        v
-[Ghi chú lỗi, kiểm script, thái độ, compliance, resolution]
-        |
-        v
-[Điền form điểm QA thủ công]
-        |
-        v
-[Tổng hợp báo cáo / feedback cho agent]
-        |
-        v
-[Chỉ cover được tỷ lệ thấp, nhiều lỗi không được phát hiện]
++----------------------+     +----------------------+     +----------------------+
+| Bước 1               |     | Bước 2               |     | Bước 3               |
+| Cuộc gọi phát sinh   | --> | Chọn sample nhỏ      | --> | Nghe lại recording   |
+|                      |     | để QA                |     | gần như toàn bộ      |
+| Ai: Hệ thống/Agent   |     | Ai: QA/Supervisor    |     | Ai: QA               |
+| ⏱ 1'                 |     | ⏱ 5'                 |     | ⏱ 20' 🔴             |
+| In: cuộc gọi         |     | In: danh sách call   |     | In: file ghi âm      |
+| Out: recording       |     | Out: call được chọn  |     | Out: ghi chú thô     |
++----------------------+     +----------------------+     +----------------------+
+                                                                  |
+                                                                  v
++----------------------+     +----------------------+     +----------------------+
+| Bước 6               |     | Bước 5               |     | Bước 4               |
+| Feedback/coaching    | <-- | Tổng hợp báo cáo     | <-- | Chấm điểm rubric     |
+| cho agent            |     | QA thủ công          |     | + ghi lỗi            |
+| Ai: QA/Supervisor    |     | Ai: QA/Supervisor    |     | Ai: QA               |
+| ⏱ 10'                |     | ⏱ 10'                |     | ⏱ 9'                 |
+| In: report           |     | In: điểm từng call   |     | In: ghi chú thô      |
+| Out: coaching note   |     | Out: QA report       |     | Out: điểm QA         |
++----------------------+     +----------------------+     +----------------------+
+
+🔴 = Bottleneck        ⏱ Tổng: ~55 phút/call được QA
+Bottleneck: QA phải nghe và chấm thủ công từng file, nên coverage thấp và feedback chậm.
 ```
 
 | Bước | Actor | Input | Output | Thời gian/tần suất | Ghi chú |
@@ -149,34 +153,32 @@ Bottleneck nằm ở bước QA phải nghe và chấm từng cuộc gọi thủ
 
 
 ```text
-FUTURE STATE — AI QA workflow cho transcript cuộc gọi CSKH
+FUTURE STATE — 6 bước, ~18 phút / 1 cuộc gọi cần QA review
 
-[Cuộc gọi CSKH / transcript mẫu]
-        |
-        v
-[Speech-to-text nếu input là audio]
-        |
-        v
-[Rule check: chào hỏi, xác minh, từ khóa compliance, lời cấm]
-        |
-        v
-[LLM chấm theo rubric + trích dẫn bằng chứng từ transcript]
-        |
-        v
-[Gắn nhãn: pass / fail / cần QA review]
-        |
-        +-------------------------------+
-        |                               |
-        v                               v
-[QA review case rủi ro]       [Tự động tổng hợp insight]
-        |                               |
-        v                               v
-[Feedback cho agent]          [Dashboard lỗi phổ biến]
++----------------------+     +----------------------+     +----------------------+
+| Bước 1               |     | Bước 2               |     | Bước 3               |
+| Auto-transcribe      | --> | Rule/script check    | --> | AI chấm rubric       |
+| audio -> transcript  |     | compliance cơ bản    |     | + trích evidence     |
+| 🔵 Workflow step     |     | 🔵 Rule/script       |     | 🔵 Workflow step     |
+| ⏱ 2'                 |     | ⏱ 1'                 |     | ⏱ 3'                 |
+| In: recording        |     | In: transcript       |     | In: transcript       |
+| Out: transcript      |     | Out: rule flags      |     | Out: score + quote   |
++----------------------+     +----------------------+     +----------------------+
+                                                                  |
+                                                                  v
++----------------------+     +----------------------+     +----------------------+
+| Bước 6               |     | Bước 5               |     | Bước 4               |
+| Feedback/coaching    | <-- | Tổng hợp insight     | <-- | QA review case       |
+| cho agent            |     | lỗi phổ biến         |     | fail/low confidence |
+| 🟢 Human             |     | 🔵 Workflow step     |     | 🟢 Human boundary   |
+| ⏱ 3'                 |     | ⏱ 2'                 |     | ⏱ 7'                |
+| In: report final     |     | In: score đã duyệt   |     | In: score + quote   |
+| Out: coaching note   |     | Out: dashboard       |     | Out: score final    |
++----------------------+     +----------------------+     +----------------------+
 
-Human boundary:
-- AI chỉ pre-score và gợi ý bằng chứng, không tự kỷ luật agent.
-- QA/supervisor là người duyệt cuối với cuộc gọi fail, low confidence hoặc liên quan compliance.
-- Dữ liệu phải được ẩn thông tin cá nhân trước khi dùng cho pilot.
+🔵 = AI/Rule xử lý      🟢 = Human boundary      ⏱ Tổng: ~18 phút/call cần review
+Fallback: AI score thấp / transcript lỗi / compliance nghiêm trọng -> QA nghe lại recording gốc và tự chấm.
+Bottleneck mới: QA lead/supervisor cần giữ rubric rõ và audit sample để tránh AI chấm sai có hệ thống.
 ```
 
 Before/after impact:
