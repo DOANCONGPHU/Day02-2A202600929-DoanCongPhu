@@ -114,7 +114,7 @@ CURRENT STATE — 6 bước, ~55 phút / 1 cuộc gọi được QA
 | Cuộc gọi phát sinh   | --> | Chọn sample nhỏ      | --> | Nghe lại recording   |
 |                      |     | để QA                |     | gần như toàn bộ      |
 | Ai: Hệ thống/Agent   |     | Ai: QA/Supervisor    |     | Ai: QA               |
-| ⏱ 1'                 |     | ⏱ 5'                 |     | ⏱ 20' 🔴             |
+| ⏱ 1'                |     | ⏱ 5'                 |     | ⏱ 20' 🔴            |
 | In: cuộc gọi         |     | In: danh sách call   |     | In: file ghi âm      |
 | Out: recording       |     | Out: call được chọn  |     | Out: ghi chú thô     |
 +----------------------+     +----------------------+     +----------------------+
@@ -125,7 +125,7 @@ CURRENT STATE — 6 bước, ~55 phút / 1 cuộc gọi được QA
 | Feedback/coaching    | <-- | Tổng hợp báo cáo     | <-- | Chấm điểm rubric     |
 | cho agent            |     | QA thủ công          |     | + ghi lỗi            |
 | Ai: QA/Supervisor    |     | Ai: QA/Supervisor    |     | Ai: QA               |
-| ⏱ 10'                |     | ⏱ 10'                |     | ⏱ 9'                 |
+| ⏱ 10'               |     | ⏱ 10'                |     | ⏱ 9'                |
 | In: report           |     | In: điểm từng call   |     | In: ghi chú thô      |
 | Out: coaching note   |     | Out: QA report       |     | Out: điểm QA         |
 +----------------------+     +----------------------+     +----------------------+
@@ -159,8 +159,8 @@ FUTURE STATE — 6 bước, ~18 phút / 1 cuộc gọi cần QA review
 | Bước 1               |     | Bước 2               |     | Bước 3               |
 | Auto-transcribe      | --> | Rule/script check    | --> | AI chấm rubric       |
 | audio -> transcript  |     | compliance cơ bản    |     | + trích evidence     |
-| 🔵 Workflow step     |     | 🔵 Rule/script       |     | 🔵 Workflow step     |
-| ⏱ 2'                 |     | ⏱ 1'                 |     | ⏱ 3'                 |
+| 🔵 Workflow step    |     | 🔵 Rule/script       |     | 🔵 Workflow step     |
+| ⏱ 2'                |     | ⏱ 1'                 |     | ⏱ 3'                |
 | In: recording        |     | In: transcript       |     | In: transcript       |
 | Out: transcript      |     | Out: rule flags      |     | Out: score + quote   |
 +----------------------+     +----------------------+     +----------------------+
@@ -169,11 +169,11 @@ FUTURE STATE — 6 bước, ~18 phút / 1 cuộc gọi cần QA review
 +----------------------+     +----------------------+     +----------------------+
 | Bước 6               |     | Bước 5               |     | Bước 4               |
 | Feedback/coaching    | <-- | Tổng hợp insight     | <-- | QA review case       |
-| cho agent            |     | lỗi phổ biến         |     | fail/low confidence |
-| 🟢 Human             |     | 🔵 Workflow step     |     | 🟢 Human boundary   |
-| ⏱ 3'                 |     | ⏱ 2'                 |     | ⏱ 7'                |
-| In: report final     |     | In: score đã duyệt   |     | In: score + quote   |
-| Out: coaching note   |     | Out: dashboard       |     | Out: score final    |
+| cho agent            |     | lỗi phổ biến         |     | fail/low confidence  |
+| 🟢 Human            |     | 🔵 Workflow step     |     | 🟢 Human boundary   |
+| ⏱ 3'                |     | ⏱ 2'                 |     | ⏱ 7'                |
+| In: report final     |     | In: score đã duyệt   |     | In: score + quote    |
+| Out: coaching note   |     | Out: dashboard       |     | Out: score final     |
 +----------------------+     +----------------------+     +----------------------+
 
 🔵 = AI/Rule xử lý      🟢 = Human boundary      ⏱ Tổng: ~18 phút/call cần review
