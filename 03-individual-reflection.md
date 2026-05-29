@@ -6,7 +6,7 @@
 |---|---|---|
 | Scan cá nhân | Scan 9 vấn đề từ trải nghiệm học bootcamp và chọn top 3 để pitch. | Có input rõ về actor, bottleneck, impact và workflow học tập. |
 | Pitch Problem Card | Pitch 3 vấn đề: tài liệu mở sát giờ, học viên trái ngành không theo kịp, thiếu AI tutor. | Nhóm gom được cụm hỗ trợ học tập và tiếp thu kiến thức. |
-| Challenge / chọn bài | So sánh candidate theo workflow, metric, độ vừa sức lab và AI-fit. | Nhóm không chọn theo cảm tính mà dùng score để đồng thuận. |
+| Challenge / chọn bài | Đặt câu hỏi phản biện: Virtual TA có dễ trùng với nhóm khác không, hồ sơ hoàn tiền có đủ dữ liệu thật không, QA cuộc gọi có rubric và quyền dùng transcript không. | Nhóm chọn #9 nhưng ghi rõ điều kiện pilot: cần transcript ẩn danh, rubric rõ và QA review cuối. |
 | Research | Tìm Amazon Connect Contact Lens, Google Cloud Quality AI, Observe.AI, CallMiner. | Nhóm thấy không cần build Agent từ đầu, chỉ cần Workflow: transcript -> scorecard -> QA review. |
 | Workflow / Problem Statement | Vẽ current/future workflow và problem statement cho candidate #9-đánh giá chất lượng cuộc gọi CSKH. | Nhóm dùng làm workflow bản cuối |
 | Rule / Workflow / Agent | Cùng nhóm so sánh Rule, Workflow, Agent. | Nhóm chọn Workflow thay vì nhảy thẳng sang Agent. |
