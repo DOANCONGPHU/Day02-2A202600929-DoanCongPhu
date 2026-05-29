@@ -14,127 +14,146 @@
 | 9 | AI có thể tốt hơn | Không có hệ thống cá nhân hóa tốc độ học cho người nền tảng yếu/mạnh khác nhau | Học viên | Người yếu bị quá tải, người mạnh phải chờ tiến độ chung của lớp |
 
 ## Top 3
+
 | Rank | Problem | Vì sao chọn | Điều còn chưa chắc |
 |---|---|---|---|
 | 1 | Tài liệu học tập mở quá sát giờ học nên không kịp ôn trước | Đây là pain xảy ra thường xuyên, ảnh hưởng nhiều người và tác động trực tiếp tới khả năng theo kịp buổi học | Chưa chắc việc mở tài liệu sớm có giúp cải thiện hiệu quả học rõ rệt không |
 | 2 | Học viên trái ngành không load kịp kiến thức khi học lab buổi chiều do lượng kiến thức tăng quá nhanh | Pain lớn và thực tế với nhiều học viên trái ngành, có dấu hiệu thật rõ ràng | Chưa xác định được nguyên nhân chính là do nền tảng yếu hay tốc độ dạy quá nhanh |
 | 3 | Không có AI tutor hỗ trợ recap kiến thức nền hoặc giải thích nhanh thuật ngữ | Có tiềm năng AI rõ ràng, giảm tải mentor và hỗ trợ học viên học chủ động hơn | Chưa chắc học viên sẽ dùng thường xuyên thay vì hỏi mentor trực tiếp |
 
-## Problem Card #1 
+## Problem Card #1
 
 **Problem 1 câu:**  
-Học viên  không có đủ thời gian ôn trước vì tài liệu thường được mở quá sát giờ học, dẫn đến mất nhịp và khó theo kịp lab.
+Học viên không có đủ thời gian ôn trước vì tài liệu thường được mở quá sát giờ học, dẫn đến mất nhịp và khó theo kịp lab.
 
 **Actor:**  
 Học viên
 
 **Thời điểm / bối cảnh:**  
-Trước buổi học vài giờ hoặc ngay khi buổi học bắt đầu
-Đặc biệt ở các buổi lab kiến thức mới/chuyên sâu
+Trước buổi học vài giờ hoặc ngay khi buổi học bắt đầu.  
+Đặc biệt ở các buổi lab kiến thức mới/chuyên sâu.
 
 **Current workflow:**
 
 ```text
-1. Giảng viên có tài liệu
-2. Tài liệu được publish sát giờ học
-3. Học viên vào lớp mới bắt đầu đọc
-4. Học viên gặp nhiều thuật ngữ/concept mới
-5. Trong lúc lab phải vừa học lý thuyết vừa thực hành
-6. Mentor phải hỗ trợ nhiều câu hỏi cơ bản
-7 Một số học viên không hoàn thành lab đúng giờ
+CURRENT STATE — 75 phút đầu buổi/lab
+
++--------------------+     +--------------------+     +--------------------+
+| 1 Nhận tài liệu    | --> | 2 Đọc vội slide   | --> | 3 Gặp thuật ngữ   |
+|   sát giờ          |     |   + lab guide      |     |   /concept mới    |
+|   1'               |     |   15'              |     |   10'             |
++--------------------+     +--------------------+     +--------------------+
+                                                               |
+                                                               v
++--------------------+     +--------------------+     +--------------------+
+| 6 Làm tiếp chậm    | <-- | 5 Hỏi mentor       | <-- | 4 Vừa học lý      |
+|   /mất nhịp        |     |   câu cơ bản       |     |   thuyết + lab    |
+|   14'              |     |   15'              |     |   20' 🔴          |
++--------------------+     +--------------------+     +--------------------+
+          |
+          v
++--------------------+
+| 7 Không hoàn thành |
+|   lab đúng giờ     |
+|   /tự ôn lại       |
+|   sau lab          |
++--------------------+
+
+🔴 = Bottleneck: phải vừa đọc kiến thức mới vừa làm lab trong cùng một thời điểm.
 ```
 
 **Bottleneck:**  
-Không có thời gian chuẩn bị kiến thức nền trước buổi học
-Kiến thức mới xuất hiện quá nhiều trong thời gian ngắn
+Không có thời gian chuẩn bị kiến thức nền trước buổi học.  
+Kiến thức mới xuất hiện quá nhiều trong thời gian ngắn.
 
 **Impact:**  
-Học viên bị quá tải
-Không theo kịp tiến độ, giảm chất lượng đầu ra
-Mentor mất nhiều thời gian support câu hỏi lặp lại
-Một số học viên mất động lực vì không theo kịp
+Học viên bị quá tải.  
+Không theo kịp tiến độ, giảm chất lượng đầu ra.  
+Mentor mất nhiều thời gian support câu hỏi lặp lại.  
+Một số học viên mất động lực vì không theo kịp.
 
 **Success metric:**  
-Tài liệu được mở trước ít nhất 1 ngày
-Tăng số học viên hoàn thành lab đúng giờ
-Học viên self-report hiểu bài tốt hơn
+Tài liệu được mở trước ít nhất 1 ngày.  
+Tăng số học viên hoàn thành lab đúng giờ.  
+Học viên self-report hiểu bài tốt hơn.
+
 **Non-AI alternative:**  
-Publish tài liệu sớm hơn
-Có checklist prerequisite trước mỗi buổi
-Gửi video/tóm tắt kiến thức nền trước giờ học
+Publish tài liệu sớm hơn.  
+Có checklist prerequisite trước mỗi buổi.  
+Gửi video/tóm tắt kiến thức nền trước giờ học.
 
 **AI hypothesis:**  
-AI có thể tự động tạo recap/prerequisite ngắn từ slide hoặc lab
-AI recommend phần cần đọc trước dựa trên trình độ học viên
-AI chatbot giải thích nhanh thuật ngữ trước buổi học
+AI có thể tự động tạo recap/prerequisite ngắn từ slide hoặc lab.  
+AI recommend phần cần đọc trước dựa trên trình độ học viên.  
+AI chatbot giải thích nhanh thuật ngữ trước buổi học.
 
 **Quick gut:**  
-[x] Workflow
-[x] Agent
-[ ] No AI / process fix
-[ ] Rule
-[ ] Chưa biết
+No AI / process fix
 
-
-### Draft current workflow
+### Draft future workflow
 
 ```text
-[Trước buổi học]
-       |
-       v
-[Mentor chuẩn bị slide / lab]
-       |
-       v
-[Tài liệu được mở sát giờ]
-       |
-       v
-[Học viên vào lớp mới đọc]
-       |
-       v
-[Gặp nhiều thuật ngữ / kiến thức mới]
-       |
-       v
-[Vừa học lý thuyết + vừa làm lab]
-       |
-       v
-[Không hiểu / bị chậm nhịp]
-       |
-       +----------------------+
-       |                      |
-       v                      v
-[Hỏi mentor nhiều]     [Không hoàn thành lab]
-       |                      |
-       +----------+-----------+
-                  v
-        [Mentor quá tải support]
-                  |
-                  v
-        [Chất lượng buổi học giảm]
-```
-# Problem #2
+FUTURE STATE — 30 phút chuẩn bị trước buổi học
 
-Problem :
++--------------------+     +--------------------+     +--------------------+
+| 1 Mở tài liệu      | --> | 2 AI tạo recap     | --> | 3 Học viên đọc    |
+|   trước 1 ngày     |     |   + checklist      |     |   prerequisite    |
+|   1'               |     |   3'               |     |   15'             |
++--------------------+     +--------------------+     +--------------------+
+                                                               |
+                                                               v
++--------------------+     +--------------------+     +--------------------+
+| 6 Vào lab đúng     | <-- | 5 Mentor check     | <-- | 4 AI giải thích   |
+|   nhịp hơn         |     |   nhanh điểm khó   |     |   thuật ngữ khó   |
+|   1'               |     |   5' 🟢            |     |   5'              |
++--------------------+     +--------------------+     +--------------------+
+
+🟢 = Human boundary: mentor/giảng viên vẫn duyệt checklist và giải thích điểm quan trọng.
+Fallback: AI recap thiếu hoặc sai -> học viên quay lại slide/lab guide gốc và hỏi mentor.
+```
+
+## Problem Card #2
+
+**Problem 1 câu:**  
 Học viên trái ngành không load kịp kiến thức khi học lab do tốc độ học và độ khó tăng quá nhanh.
 
 **Actor:**
 
 * Học viên trái ngành
 
-
 **Thời điểm / bối cảnh:**
 
 * Trong các buổi lab chiều hoặc các buổi kiến thức chuyên sâu
 * Đặc biệt sau 1-2 tuần đầu của khóa học
 
-**Current workflow 3-7 bước:**
+**Current workflow:**
 
-1. Học viên học kiến thức nền cơ bản
-2. Vào buổi lab chuyên sâu
-3. Mentor giải thích nhanh workflow/concept mới
-4. Học viên chưa hiểu context nhưng phải tiếp tục theo flow lớp
-5. Trong lúc code phát sinh thêm lỗi/tool mới
-6. Học viên bị mất nhịp
-7. Phải hỏi mentor liên tục hoặc bỏ dở lab
+```text
+CURRENT STATE — 90 phút trong buổi lab chuyên sâu
+
++--------------------+     +--------------------+     +--------------------+
+| 1 Ôn nền cơ bản    | --> | 2 Vào lab chuyên  | --> | 3 Mentor giải     |
+|   trước đó         |     |   sâu              |     |   thích nhanh     |
+|   10'              |     |   5'               |     |   10'             |
++--------------------+     +--------------------+     +--------------------+
+                                                               |
+                                                               v
++--------------------+     +--------------------+     +--------------------+
+| 6 Hỏi mentor       | <-- | 5 Gặp lỗi/tool     | <-- | 4 Chưa hiểu       |
+|   liên tục         |     |   mới khi code     |     |   context nhưng   |
+|   20'              |     |   20'              |     |   vẫn theo lớp    |
++--------------------+     +--------------------+     |   15' 🔴          |
+          |                                             +--------------------+
+          v
++--------------------+
+| 7 Bỏ dở hoặc       |
+|   không hoàn thành |
+|   lab              |
+|   10'              |
++--------------------+
+
+🔴 = Bottleneck: chênh lệch context/kiến thức nền khiến học viên mất flow giữa lab.
+```
 
 **Bottleneck:**
 
@@ -168,44 +187,35 @@ Học viên trái ngành không load kịp kiến thức khi học lab do tốc 
 * AI generate roadmap/prerequisite cá nhân hóa
 
 **Quick gut:**
-[ ] No AI / process fix
-[ ] Rule
-[x] Workflow
-[x] Agent
-[ ] Chưa biết
+Workflow
+Agent
 
-**ASCII Flow:**
+### Draft future workflow
 
 ```text
-[Học kiến thức nền cơ bản]
-              |
-              v
-      [Vào buổi lab]
-              |
-              v
- [Kiến thức/workflow mới xuất hiện]
-              |
-              v
- [Học viên chưa hiểu context]
-              |
-              v
- [Vẫn phải tiếp tục code theo lớp]
-              |
-              v
-       [Bị mất nhịp]
-              |
-      +-------+--------+
-      |                |
-      v                v
-[Hỏi mentor]    [Không hoàn thành lab]
-      |                |
-      +--------+-------+
-               v
-      [Mất động lực học]
-```
-# Problem #3
+FUTURE STATE — 45 phút hỗ trợ theo level
 
-**Problem 1 câu:**
++--------------------+     +--------------------+     +--------------------+
+| 1 Pre-check level  | --> | 2 AI gợi ý        | --> | 3 AI giải thích   |
+|   trước lab        |     |   prerequisite    |     |   concept theo    |
+|   5'               |     |   roadmap         |     |   level           |
++--------------------+     |   5'              |     |   10'             |
+                           +--------------------+     +--------------------+
+                                                               |
+                                                               v
++--------------------+     +--------------------+     +--------------------+
+| 6 Mentor xử lý     | <-- | 5 Học viên hỏi    | <-- | 4 Lab chia thành |
+|   case khó         |     |   AI tại bước kẹt |     |   checkpoint nhỏ |
+|   10' 🟢           |     |   5'              |     |   10'             |
++--------------------+     +--------------------+     +--------------------+
+
+🟢 = Human boundary: mentor vẫn xử lý lỗi lạ, case khó và điều chỉnh tốc độ lớp.
+Fallback: AI giải thích không đúng context -> mentor quay lại mini-explain hoặc chia nhỏ lab hơn.
+```
+
+## Problem Card #3
+
+**Problem 1 câu:**  
 Không có AI tutor hỗ trợ recap kiến thức nền hoặc giải thích nhanh thuật ngữ khiến mentor phải trả lời lặp lại nhiều lần.
 
 **Actor:**
@@ -219,15 +229,26 @@ Không có AI tutor hỗ trợ recap kiến thức nền hoặc giải thích nh
 * Khi gặp thuật ngữ mới hoặc lỗi kỹ thuật
 * Sau giờ học khi tự học lại
 
-**Current workflow 3-7 bước:**
+**Current workflow:**
 
-1. Học viên gặp thuật ngữ/concept mới
-2. Không hiểu nhưng flow lớp vẫn tiếp tục
-3. Học viên pause để Google hoặc hỏi mentor
-4. Mentor trả lời thủ công
-5. Các học viên khác tiếp tục hỏi các câu tương tự
-6. Mentor bị phân tán thời gian support
-7. Học viên vẫn khó hiểu nếu giải thích quá technical
+```text
+CURRENT STATE — 65 phút/cụm câu hỏi lặp lại trong lab
+
++--------------------+     +--------------------+     +--------------------+
+| 1 Gặp thuật ngữ    | --> | 2 Không hiểu       | --> | 3 Google thủ công |
+|   /concept mới     |     |   nhưng lớp vẫn    |     |   hoặc hỏi mentor |
+|   5'               |     |   chạy tiếp        |     |   10'             |
++--------------------+     |   5'               |     +--------------------+
+                           +--------------------+              |
+                                                               v
++--------------------+     +--------------------+     +--------------------+
+| 6 Flow lớp bị      | <-- | 5 Nhiều người      | <-- | 4 Mentor trả lời  |
+|   chậm lại         |     |   hỏi lại tương tự |     |   thủ công        |
+|   10'              |     |   15'              |     |   20' 🔴          |
++--------------------+     +--------------------+     +--------------------+
+
+🔴 = Bottleneck: mentor phải giải thích thủ công cùng một nhóm câu hỏi cho nhiều học viên.
+```
 
 **Bottleneck:**
 
@@ -261,35 +282,28 @@ Không có AI tutor hỗ trợ recap kiến thức nền hoặc giải thích nh
 * AI recap nhanh kiến thức prerequisite khi học viên bị kẹt
 
 **Quick gut:**
-[ ] No AI / process fix
-[ ] Rule
-[ ] Workflow
-[x] Agent
-[ ] Chưa biết
+Agent
 
-**ASCII Flow:**
+
+### Draft future workflow
 
 ```text
- [Học viên gặp thuật ngữ mới]
-                |
-                v
-        [Không hiểu concept]
-                |
-       +--------+--------+
-       |                 |
-       v                 v
- [Google thủ công]   [Hỏi mentor]
-       |                 |
-       v                 v
- [Thông tin rời rạc] [Mentor trả lời]
-       |                 |
-       +--------+--------+
-                v
-     [Nhiều người hỏi lặp lại]
-                |
-                v
-      [Mentor bị overload]
-                |
-                v
-      [Flow lớp bị chậm]
+FUTURE STATE — 25 phút với AI tutor theo context lab
+
++--------------------+     +--------------------+     +--------------------+
+| 1 Học viên hỏi     | --> | 2 AI tìm trong     | --> | 3 AI giải thích   |
+|   AI tutor         |     |   slide/lab/FAQ    |     |   theo level      |
+|   1'               |     |   2'               |     |   3'              |
++--------------------+     +--------------------+     +--------------------+
+                                                               |
+                                                               v
++--------------------+     +--------------------+     +--------------------+
+| 6 Mentor review    | <-- | 5 AI hỏi thêm      | <-- | 4 Học viên thử    |
+|   câu khó          |     |   nếu thiếu        |     |   áp dụng lại     |
+|   6' 🟢            |     |   context          |     |   8'              |
++--------------------+     |   5'               |     +--------------------+
+                           +--------------------+
+
+🟢 = Human boundary: mentor xử lý câu hỏi khó, lỗi lạ hoặc khi AI không chắc.
+Fallback: AI trả lời mơ hồ -> học viên gửi câu hỏi kèm context cho mentor.
 ```
