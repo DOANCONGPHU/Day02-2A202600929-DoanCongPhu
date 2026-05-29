@@ -16,62 +16,53 @@
 | 8 | [Hoàng Đức Dũng] | Trích xuất và kiểm duyệt hồ sơ dịch vụ công tốn nhiều thời gian. | Nhân viên xử lý hồ sơ | Phải gõ lại dữ liệu thủ công từ các form giấy tờ cũ, dễ bị mờ/nhòe. | Workflow (OCR) |
 | 9 | [Hoàng Đức Dũng] | Đánh giá chất lượng cuộc gọi CSKH chỉ đạt tỷ lệ rất thấp (dưới 5%). | QA / Quản lý CSKH | Phải nghe lại từng file ghi âm thủ công, không đủ sức người để cover 100% cuộc gọi. | AI (Speech-to-Text) |
 
-
 ## Bước 3.2 — Gom trùng / cluster
 
-| Cluster | Candidates included | Pattern chung | Ghi chú |
-| :--- | :--- | :--- | :--- |
-| *A (Hỗ trợ học tập)* | #3, #4, #5 | *Sự thiếu hụt nguồn lực giải đáp Real-time:* Học viên có nhu cầu hỏi đáp cao (về thuật ngữ, lỗi code, quy trình) nhưng số lượng TA/Mentor có hạn, dẫn đến tình trạng "đóng băng" tiến độ thực hành và lãng phí thời gian của đôi bên. | Đây là *"Mỏ vàng"* để xây dựng Virtual TA / RAG Agent. Tính khả thi cao và tác động cực kỳ rõ rệt trong môi trường Bootcamp. |
-| *B (Tiếp thu kiến thức)* | #1, #2 | *Độ trễ trong việc nạp kiến thức:* Tốc độ cung cấp tài liệu hoặc tốc độ giảng dạy đang nhanh hơn khả năng tiêu hóa thông tin của học viên (đặc biệt là nhóm trái ngành hoặc khi tài liệu mở quá sát giờ). | Vấn đề này thiên về tối ưu *quy trình sư phạm (Process fix)* hơn là dùng AI, trừ khi kết hợp dùng AI để tóm tắt trước tài liệu. |
-| *C (Giao tiếp & Thông báo)* | #6 | *Phân mảnh luồng thông tin:* Dữ liệu, thông báo và deadline nằm rải rác ở quá nhiều nền tảng khác nhau gây nhiễu loạn, tâm lý FOMO và sót việc. | Đứng độc lập thành một cụm riêng. Phù hợp nhất với giải pháp *Automation Workflow (Gom luồng)* kết hợp AI trích xuất deadline. |
-| *D (Vận hành B2B)* | #7, #8, #9 | *Xử lý dữ liệu phi cấu trúc thủ công:* Quy trình vận hành back-office (kế toán, hành chính, CSKH) đang dùng sức người (mắt, tai) để xử lý dữ liệu thô (ảnh hóa đơn, form giấy, file ghi âm) vô cùng tốn thời gian. | Cụm bài toán *Doanh nghiệp (Enterprise)*, sử dụng OCR hoặc Speech-to-Text. Hơi "lạc quẻ" so với bối cảnh học thuật của các cụm trên. |
-
-## Bước 3.3 — Shortlist
-
-| Candidate | Vì sao vào shortlist | Rủi ro / điều chưa rõ |
+| Cluster | Candidate examples | Pattern chung |
 | :--- | :--- | :--- |
-| Cluster A — Hỗ trợ học tập: Virtual TA / AI tutor trong lab (#3, #4, #5) | Đây là cụm mạnh nhất vì nhóm hiểu workflow thật từ bối cảnh bootcamp: học viên gặp thuật ngữ, lỗi code, setup môi trường hoặc câu hỏi lặp lại rồi phải chờ TA/mentor. Actor cụ thể gồm học viên và TA/mentor. Bottleneck là bước giải đáp thắc mắc real-time khi nguồn lực support không đủ. Impact đo được bằng thời gian chờ TA, số câu hỏi lặp lại, số lượt hỏi mentor và tỷ lệ hoàn thành lab đúng giờ. Before/after workflow rất rõ: trước là hỏi thủ công và chờ support, sau là hỏi Virtual TA trước, chỉ escalates cho mentor khi câu hỏi khó. Dễ so sánh Rule / Workflow / Agent: FAQ rule-based cho câu hỏi cố định, workflow gom tài liệu-lab-FAQ, agent RAG trả lời theo context bài lab. Phạm vi vừa sức lab nếu giới hạn vào một bài lab và 1-2 nhóm câu hỏi phổ biến. | Cần nguồn tri thức đủ tốt như slide, lab guide, FAQ hoặc log câu hỏi cũ. Rủi ro AI trả lời sai nếu không giới hạn nguồn hoặc không có cơ chế báo "không chắc". Cần chốt rõ prototype hỗ trợ phần nào trước: thuật ngữ, lỗi code, hay setup môi trường. |
-| Cluster B — Tiếp thu kiến thức: học viên không kịp nạp kiến thức trước/trong lab (#1, #2) | Cụm này có actor rõ là học viên, đặc biệt học viên trái ngành. Nhóm cũng hiểu workflow học tập thật: tài liệu mở sát giờ, vào lab gặp nhiều concept mới, vừa học lý thuyết vừa thực hành nên bị mất nhịp. Bottleneck là bước chuẩn bị kiến thức nền và tiêu hóa concept trước khi làm lab. Impact có thể đo bằng tỷ lệ đọc tài liệu trước buổi học, tỷ lệ hoàn thành lab đúng giờ, số câu hỏi cơ bản trong buổi, mức tự tin self-report. Before/after workflow vẽ được: trước là vào lớp mới đọc và bị quá tải, sau là có prerequisite checklist, recap ngắn hoặc AI tóm tắt cá nhân hóa trước buổi học. Có thể so sánh Rule / Workflow / Agent: rule gửi checklist cố định, workflow tự tạo recap từ tài liệu, agent cá nhân hóa phần cần ôn theo level học viên. | Có thể nghiêng về process fix hơn là AI nếu chỉ cần mở tài liệu sớm. Cần làm rõ nhóm có đo được việc học viên đọc trước hay không. Nếu làm AI cá nhân hóa quá rộng thì vượt phạm vi lab hôm nay; nên giới hạn vào recap/prerequisite cho một buổi học cụ thể. |
-| Cluster C — Giao tiếp & thông báo: gom luồng thông tin nhiều kênh (#6) | Actor cụ thể là học viên phải theo dõi Zalo, Teams, Discord. Bottleneck là bước lướt dò thủ công nhiều kênh để tìm thông báo, deadline và việc cần làm. Impact đo được bằng số deadline bị lỡ, thời gian kiểm tra thông báo mỗi ngày, số lần hỏi lại thông tin đã được thông báo. Before/after workflow rõ: trước là mở từng app và tự lọc tin, sau là một luồng tổng hợp có deadline/action item. Dễ so sánh Rule / Workflow / Agent: rule theo keyword deadline, workflow gom tin định kỳ, agent tóm tắt và phân loại mức quan trọng. Phạm vi lab vừa nếu dùng dữ liệu mẫu thay vì tích hợp API thật. | Có thể chưa có quyền truy cập dữ liệu thật từ các kênh chat. Rủi ro bài toán bị trôi sang phần tích hợp kỹ thuật. Cần xác định nguồn chính, loại thông báo quan trọng nhất và cách đánh giá "tin quan trọng". |
-| Cluster D — Vận hành B2B: xử lý dữ liệu phi cấu trúc thủ công bằng OCR/STT + AI (#7, #8, #9) | Cụm này có ROI rõ vì actor là kế toán/hành chính, nhân viên xử lý hồ sơ, QA/CSKH; bottleneck đều là bước con người phải đọc, nghe, gõ lại hoặc đối chiếu dữ liệu phi cấu trúc. Impact đo được tốt: thời gian xử lý hồ sơ/cuộc gọi, tỷ lệ lỗi nhập liệu, tỷ lệ hồ sơ bị trả lại, tỷ lệ cuộc gọi được QA. Before/after workflow dễ vẽ: trước là kiểm tra thủ công bằng mắt/tai, sau là OCR hoặc speech-to-text, AI trích xuất/chấm điểm, con người duyệt lại. Có thể so sánh Rule / Workflow / Agent rõ: rule kiểm tra điều kiện cố định, workflow trích xuất và đối chiếu, agent hỏi lại khi thiếu dữ liệu hoặc đề xuất xử lý. | Cụm này hơi lạc khỏi bối cảnh học tập của nhóm và có thể thiếu người hiểu workflow thật đủ sâu. Cần dữ liệu mẫu, quy chế/rubric kiểm duyệt và tiêu chí thành công cụ thể. Nếu chọn cả cụm thì quá rộng cho lab; cần chọn một use case đại diện như hoàn tiền công tác phí hoặc chấm transcript CSKH. |
+| Hỗ trợ học tập | #3 AI tutor recap thuật ngữ, #4 Virtual TA, #5 FAQ cho câu hỏi lặp lại | Học viên cần giải đáp nhanh trong lúc học/lab nhưng mentor/TA không đủ thời gian để trả lời lặp lại. |
+| Tiếp thu kiến thức | #1 Tài liệu mở sát giờ, #2 Học viên trái ngành không load kịp | Tốc độ nạp kiến thức của học viên chậm hơn tốc độ cung cấp tài liệu/độ khó bài lab. |
+| Giao tiếp & thông báo | #6 Gom thông tin từ Zalo, Teams, Discord | Thông tin nằm rải rác nhiều kênh khiến học viên phải tự lọc deadline và việc cần làm. |
+| Vận hành B2B | #7 Hoàn tiền công tác phí, #8 Hồ sơ dịch vụ công, #9 QA cuộc gọi CSKH | Nhân sự vận hành phải xử lý dữ liệu phi cấu trúc bằng mắt/tai/tay, tốn thời gian và khó mở rộng coverage. |
 
-## Bước 3.4 — Score để đồng thuận
+## Bước 3.3 — Shortlist và score
 
-Chấm 1-5. Điểm không cần tuyệt đối; mục tiêu là ép nhóm nói rõ lý do.
+Chấm 1-5 theo từng candidate cụ thể. Cluster chỉ dùng để gom ý; quyết định cuối chọn một candidate đủ rõ để đào sâu.
 
 | Candidate | Actor rõ | Workflow rõ | Pain có evidence | Impact đo được | Làm trong lab | So sánh R/W/A được | Nhóm hiểu domain | Tổng |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Cluster A — Hỗ trợ học tập: Virtual TA / AI tutor trong lab (#3, #4, #5) | 5 | 5 | 3 | 5 | 4 | 4 | 4 | 30 |
-| Cluster B — Tiếp thu kiến thức: học viên không kịp nạp kiến thức trước/trong lab (#1, #2) | 5 | 4 | 4 | 4 | 4 | 4 | 5 | 30 |
-| Cluster C — Giao tiếp & thông báo: gom luồng thông tin nhiều kênh (#6) | 5 | 4 | 3 | 4 | 4 | 5 | 4 | 29 |
-| Cluster D — Vận hành B2B: xử lý dữ liệu phi cấu trúc thủ công bằng OCR/STT + AI (#7, #8, #9) | 4 | 5 | 5 | 5 | 2 | 5 | 5 | 31 |
+| #9 — Đánh giá chất lượng cuộc gọi CSKH chỉ đạt tỷ lệ rất thấp, QA phải nghe file ghi âm thủ công | 5 | 5 | 5 | 5 | 4 | 5 | 4 | 33 |
+| #4 — Học viên nhiều nhưng trợ giảng ít, thắc mắc không được giải đáp kịp thời | 5 | 5 | 4 | 4 | 5 | 5 | 4 | 32 |
+| #7 — Xử lý hồ sơ hoàn tiền công tác phí chậm và tốn công | 5 | 5 | 3 | 5 | 4 | 5 | 3 | 30 |
+| #3 — Không có AI tutor hỗ trợ recap kiến thức nền hoặc giải thích thuật ngữ | 4 | 4 | 4 | 4 | 5 | 5 | 4 | 30 |
+| #6 — Khó nắm bắt thông tin do có quá nhiều kênh thông báo | 5 | 4 | 3 | 4 | 4 | 5 | 4 | 29 |
 
-Candidate nhóm chọn:
-
-```text
-Cluster A — Hỗ trợ học tập: Virtual TA / AI tutor trong lab (#3, #4, #5)
-```
+Nhóm chọn: **#9 — Đánh giá chất lượng cuộc gọi CSKH**.
 
 Vì sao chọn:
 
 ```text
-Cluster A có điểm cao nhất vì nhóm hiểu domain học lab rõ nhất, actor và bottleneck cụ thể, impact đo được, và có thể triển khai prototype nhỏ trong lab hôm nay. Bài toán cũng cho phép so sánh rõ giữa Rule-based FAQ, Workflow gom tài liệu/FAQ, và Agent RAG trả lời theo context bài lab.
+Candidate #9 có tổng điểm cao nhất và ít bị trùng với các bài toán học tập/Virtual TA phổ biến. Đây là bài toán business rõ: actor cụ thể là QA/quản lý CSKH, bottleneck nằm đúng ở bước nghe lại và chấm từng cuộc gọi thủ công, impact đo được bằng tỷ lệ cuộc gọi được QA, thời gian chấm mỗi cuộc gọi, điểm compliance và số lỗi được phát hiện.
+
+Về AI, candidate này có AI-fit mạnh nhưng vẫn kiểm soát được: Rule kiểm tra script/compliance cố định, Workflow dùng speech-to-text + scoring rubric, Agent có thể là hướng mở rộng sau để đề xuất coaching. Trong lab hôm nay có thể prototype bằng transcript mẫu thay vì xử lý audio thật, nên vừa đủ khả thi.
 ```
 
 Vì sao không chọn các candidate còn lại:
 
 ```text
-Cluster B liên quan trực tiếp đến học tập nhưng có nguy cơ là process fix nhiều hơn AI, ví dụ chỉ cần mở tài liệu sớm hoặc gửi checklist trước buổi học.
+#4 có điểm rất cao nhưng dễ trùng với nhiều nhóm khác vì bài toán Virtual TA trong lab khá phổ biến. Ngoài ra impact cần đo qua hành vi học viên và adoption, không trực tiếp ra KPI vận hành như QA cuộc gọi.
 
-Cluster C có workflow rõ và phù hợp automation, nhưng cần dữ liệu từ nhiều kênh chat; nếu không có dữ liệu thật thì prototype dễ bị giả lập nhiều.
+#7 có ROI rõ nhưng cần quy chế công tác phí và hóa đơn mẫu đủ thật. Nếu thiếu dữ liệu, bài toán dễ biến thành demo OCR chung chung.
 
-Cluster D có impact doanh nghiệp rõ, nhưng nhóm chưa chắc hiểu sâu workflow kế toán/hồ sơ/CSKH và phạm vi hơi rộng cho lab nếu chọn cả cụm.
+#3 gần với #4 và thuộc nhóm AI tutor, dễ bị trùng hướng với nhiều nhóm. Scope cũng dễ phình thành trợ lý học tập tổng quát.
+
+#6 phù hợp automation nhưng phụ thuộc quyền truy cập nhiều kênh chat. Nếu chỉ dùng dữ liệu giả lập, phần business impact yếu hơn #9.
 ```
 
 Nếu có disagreement, nhóm xử lý thế nào:
 
 ```text
-Nhóm ưu tiên candidate có người hiểu workflow thật, có thể vẽ before/after ngay và làm prototype nhỏ trong thời gian lab. Nếu còn phân vân giữa Cluster A và B, chọn Cluster A vì bottleneck nằm ở một bước cụ thể hơn: giải đáp thắc mắc real-time trong lúc làm lab.
+Nhóm dùng điểm số làm cơ sở, sau đó áp dụng tie-break business: ưu tiên candidate ít trùng, có KPI vận hành rõ, có before/after workflow cụ thể và prototype được trong lab. Vì vậy chọn #9 thay vì các bài toán học tập dù nhóm cũng hiểu domain học tập tốt.
 ```
 
 ---
@@ -82,30 +73,30 @@ Nhóm ưu tiên candidate có người hiểu workflow thật, có thể vẽ be
 
 | Nguồn | Số người / số mẫu | Tín hiệu xác nhận | Tín hiệu phản bác | Nhóm sửa problem thế nào |
 | :--- | ---: | :--- | :--- | :--- |
-| Quan sát nội bộ nhóm / Problem Cards | 3 người đưa candidate | Các candidate #3, #4, #5 đều xoay quanh cùng một điểm đau: học viên bị kẹt khi gặp thuật ngữ, lỗi code, setup môi trường hoặc câu hỏi lặp lại; TA/mentor phải trả lời thủ công nhiều lần. | Chưa có số liệu chính thức về thời gian chờ TA và số câu hỏi lặp lại trên từng buổi. | Thu hẹp từ "AI tutor học mọi thứ" thành "Virtual TA hỗ trợ câu hỏi lặp lại và câu hỏi context bài lab trong lúc thực hành". |
-| Quick interview đề xuất | 3-5 học viên + 1 TA | Cần hỏi: lần gần nhất bị kẹt trong lab là khi nào, chờ hỗ trợ bao lâu, câu hỏi thuộc nhóm setup/thuật ngữ/lỗi code/quy trình, có tự xử lý được không. | Nếu đa số học viên không hỏi vì thiếu động lực hoặc chưa đọc tài liệu, AI tutor không giải quyết gốc rễ. | Sau interview, ưu tiên 1-2 intent có tần suất cao nhất thay vì làm chatbot quá rộng. |
-| Micro survey / Discord poll đề xuất | 5-10 học viên | Cần đo: tần suất bị kẹt trong lab, thời gian tự tra cứu, thời gian chờ mentor, mức độ sẵn sàng dùng Virtual TA trước khi hỏi người thật. | Nếu học viên vẫn thích hỏi trực tiếp TA hơn vì tin tưởng hơn, adoption sẽ thấp. | Thêm cơ chế "AI trả lời kèm nguồn" và nút escalates cho TA để tăng niềm tin. |
-| Log / dấu hiệu thật từ scan cá nhân | Quan sát theo buổi học | Có dấu hiệu 5-10 người/buổi phải hỏi lại mentor, nhiều người không hoàn thành lab đúng giờ, mentor bị hỏi lại cùng dạng câu hỏi nhiều lần. | Log hiện tại là quan sát định tính, chưa tách rõ câu hỏi lặp lại với câu hỏi khó thật sự cần mentor. | Baseline cần đo trong 1 buổi: tổng câu hỏi, câu hỏi lặp lại, thời gian chờ, số câu AI có thể trả lời bằng tài liệu. |
+| Candidate evidence | 1 candidate #9 | Problem nêu rõ QA chỉ đánh giá được tỷ lệ rất thấp, dưới 5%, vì phải nghe lại từng file ghi âm thủ công. Đây là tín hiệu pain đủ mạnh để shortlist. | Chưa có log thật về số cuộc gọi/ngày, thời lượng cuộc gọi trung bình, thời gian QA/call và rubric QA hiện tại. | Giữ problem, nhưng giới hạn pilot ở "chấm transcript cuộc gọi theo rubric" thay vì làm toàn bộ hệ thống contact center. |
+| Quick interview đề xuất | 1 QA lead + 1 supervisor + 1 agent | Cần hỏi: mỗi ngày có bao nhiêu cuộc gọi, QA nghe bao nhiêu cuộc, mất bao lâu/call, lỗi nào cần phát hiện, rubric đang gồm những tiêu chí nào. | Nếu volume cuộc gọi thấp hoặc QA thủ công đã đủ cover, AI không tạo nhiều ROI. | Chỉ tiếp tục nếu có volume đủ lớn và QA coverage hiện tại thật sự thấp. |
+| Micro sample đề xuất | 10-20 transcript hoặc recording mẫu | Có thể kiểm tra AI chấm được các tiêu chí cơ bản như chào hỏi, xác minh thông tin, tư vấn đúng quy trình, thái độ, kết thúc cuộc gọi. | Nếu transcript quá nhiễu, thiếu speaker diarization, hoặc rubric quá mơ hồ, kết quả AI sẽ khó tin. | Bắt đầu bằng transcript sạch, rubric ngắn 5-7 tiêu chí, có QA review lại. |
+| Log / vận hành cần thu thập | 1 tuần dữ liệu QA | Cần đo baseline: số cuộc gọi phát sinh, tỷ lệ được QA, thời gian chấm/call, lỗi compliance phát hiện, số coaching action. | Nếu không có quyền dùng recording vì privacy/compliance, phải dùng dữ liệu ẩn danh hoặc transcript giả lập. | Thêm boundary: ẩn thông tin cá nhân, chỉ dùng transcript đã được phép, QA là người duyệt cuối. |
 
 Kết luận validation nhanh:
 
 ```text
-Pain có tín hiệu thật và xuất hiện lặp lại trong bối cảnh lab. Tuy nhiên, trước khi rollout cần đo baseline tối thiểu trong 1 buổi học: số câu hỏi lặp lại, thời gian chờ TA/mentor, và tỷ lệ câu hỏi có thể trả lời bằng slide/lab guide/FAQ.
+Pain có logic business mạnh vì QA thủ công thường bị giới hạn bởi thời gian nghe lại cuộc gọi. Tuy nhiên, nhóm chưa được xem dữ liệu thật nên cần validate bằng 10-20 transcript/recording mẫu và rubric QA cụ thể trước khi kết luận rollout.
 ```
 
 ## Bước 4.2 — Research giải pháp đã có
 
 | Nguồn / tool / case | Link | Họ giải quyết phần nào? | Điểm mạnh | Khoảng trống / rủi ro | Bài học cho nhóm |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Khanmigo by Khan Academy | [khanmigo.ai](https://khanmigo.ai) | AI tutor và teaching assistant cho học tập; hướng người học suy nghĩ thay vì chỉ đưa đáp án. | Rất sát bối cảnh giáo dục, nhấn mạnh an toàn học tập và vai trò hỗ trợ giáo viên. | Không phải công cụ tùy biến trực tiếp cho lab/slide riêng của lớp; cần content và guardrail riêng. | Virtual TA không nên "làm hộ bài"; nên gợi ý, hỏi ngược, giải thích từng bước và khuyến khích học viên tự làm. |
-| Coursera Coach | [coursera.org/explore/coach](https://www.coursera.org/explore/coach) | Hỗ trợ người học hiểu concept, nhận giải thích ngắn, tóm tắt và luyện tập trong ngữ cảnh khóa học. | Cho thấy nhu cầu AI học tập theo course context là có thật. | Bị giới hạn trong hệ sinh thái Coursera; không xử lý trực tiếp lỗi setup/lỗi code trong lab nội bộ. | Prototype nên bám context bài học hiện tại, không trả lời chung chung như chatbot ngoài lớp. |
-| Intercom Fin AI Agent | [intercom.com/help](https://www.intercom.com/help/en/articles/7837535-fin-ai-agent-faqs) | AI support agent trả lời từ support content, biết thể hiện không chắc và handoff cho người thật khi không đủ thông tin. | Mẫu tốt cho bài toán câu hỏi lặp lại và giảm tải support tuyến đầu. | Là sản phẩm customer support, không phải tutor; nếu áp dụng vào học tập cần tránh trả lời như "đóng ticket". | Cần có knowledge base sạch, trả lời kèm nguồn, đo unresolved questions, và escalates sang TA khi không chắc. |
-| RAG / Grounding pattern | [Azure AI Search RAG](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview), [Google Vertex AI Grounding](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview) | Kết nối model với dữ liệu riêng như tài liệu, website, PDF; giảm hallucination bằng truy xuất nguồn trước khi trả lời. | Phù hợp với bài toán slide/lab guide/FAQ vì câu trả lời phải dựa trên nguồn lớp học. | Chất lượng phụ thuộc mạnh vào chuẩn bị tài liệu, chunking, naming, versioning và kiểm thử câu hỏi. | Pilot nên bắt đầu bằng RAG workflow nhỏ: 1 lab guide + 1 FAQ + 10-20 câu hỏi mẫu, chưa cần agent phức tạp. |
+| Amazon Connect Contact Lens | [aws.amazon.com/connect/contact-lens](https://aws.amazon.com/connect/contact-lens) | Phân tích hội thoại contact center, transcript, sentiment, contact drivers, performance evaluation và generative AI summary. | Cho thấy use case QA tự động trên contact center là bài toán thị trường thật, không phải ý tưởng tưởng tượng. | Gắn với hệ sinh thái Amazon Connect; triển khai thật cần tích hợp dữ liệu, quyền truy cập và privacy. | Prototype nên tập trung vào transcript + rubric + QA review trước, chưa cần tích hợp platform. |
+| Google Cloud Conversational Insights / Quality AI | [cloud.google.com/contact-center/insights/docs/qai-overview](https://cloud.google.com/contact-center/insights/docs/qai-overview) | Dùng scorecard để đánh giá chất lượng cuộc trò chuyện và hiệu suất agent. | Nhấn mạnh cần scorecard/rubric rõ, dữ liệu conversation và hướng dẫn chấm cụ thể. | Nếu rubric mơ hồ thì AI và người đều khó chấm nhất quán. | Trước khi dùng AI phải chuẩn hóa rubric: tiêu chí, thang điểm, ví dụ pass/fail. |
+| Observe.AI Quality Assurance | [observe.ai](https://www.observe.ai/post-interaction/contact-center-manual-qa) | Hỗ trợ QA contact center, evaluation form, assignments, calibration, auto QA và coaching. | Mạnh ở workflow hậu kiểm: chấm, phân công QA, calibration và coaching agent. | Có thể quá đầy đủ so với scope lab; nếu copy toàn bộ sẽ quá rộng. | Chỉ lấy pattern: auto-score trước, QA review sau, dùng kết quả để coaching. |
+| CallMiner Conversation Analytics | [callminer.com](https://callminer.com/conversation-analytics/call-center-analytics) | Phân tích hội thoại bằng speech analytics/NLP, theo dõi quality, compliance, sentiment, agent behavior. | Xác nhận các metric như compliance, agent behavior, sentiment và SLA là các output có giá trị. | Phân tích sentiment/behavior có thể gây tranh cãi nếu không có bằng chứng rõ trong transcript. | Trong pilot chỉ chấm tiêu chí quan sát được từ transcript, tránh kết luận cảm xúc quá sâu. |
 
 Kết luận research:
 
 ```text
-Các giải pháp hiện có xác nhận hướng Virtual TA là hợp lý, nhưng bài học chung là phải grounding vào tài liệu lớp học, có boundary rõ, có human handoff, và không để AI làm thay bài học viên. Với phạm vi lab hôm nay, chọn Workflow RAG nhỏ sẽ hợp lý hơn full Agent.
+Thị trường đã có các pattern rõ cho automated QA trong contact center: speech-to-text, transcript analytics, scorecard, auto-evaluation, human review và coaching. Với phạm vi lab, nhóm nên làm workflow nhỏ bằng transcript mẫu + rubric, chưa làm tích hợp call center thật.
 ```
 
 ---
@@ -117,44 +108,42 @@ Các giải pháp hiện có xác nhận hướng Virtual TA là hợp lý, như
 Dán workflow:
 
 ```text
-CURRENT STATE — trong buổi lab
+CURRENT STATE — QA cuộc gọi CSKH thủ công
 
-[Học viên gặp thuật ngữ/lỗi code/setup]
+[Hệ thống phát sinh nhiều cuộc gọi CSKH mỗi ngày]
         |
         v
-[Tự đọc lại slide/lab guide hoặc Google: 5-10']
+[QA / supervisor chọn một mẫu rất nhỏ để nghe lại]
         |
         v
-[Vẫn chưa hiểu hoặc không biết áp dụng vào bài lab]
+[Mở từng file ghi âm và nghe gần như toàn bộ cuộc gọi]
         |
         v
-[Hỏi group/TA/mentor và chờ hỗ trợ: 5-20']
+[Ghi chú lỗi, kiểm script, thái độ, compliance, resolution]
         |
         v
-[TA/mentor hỏi lại context và trả lời thủ công]
+[Điền form điểm QA thủ công]
         |
-        +-------------------------------+
-        |                               |
-        v                               v
-[Học viên tiếp tục lab]        [Câu hỏi tương tự lặp lại]
-        |                               |
-        v                               v
-[Một số bạn hoàn thành chậm]   [TA/mentor bị phân tán]
+        v
+[Tổng hợp báo cáo / feedback cho agent]
+        |
+        v
+[Chỉ cover được tỷ lệ thấp, nhiều lỗi không được phát hiện]
 ```
 
 | Bước | Actor | Input | Output | Thời gian/tần suất | Ghi chú |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | Học viên | Lab task, slide, môi trường code | Phát hiện không hiểu thuật ngữ, lỗi setup hoặc lỗi code | Xảy ra trong lúc làm lab | Đây là điểm bắt đầu của pain, đặc biệt với học viên trái ngành. |
-| 2 | Học viên | Slide/lab guide/Google | Tự tìm câu trả lời | Ước lượng 5-10 phút/lần | Dễ đọc sai context vì tài liệu ngoài không khớp bài lab. |
-| 3 | Học viên | Câu hỏi chưa giải được | Gửi câu hỏi lên group hoặc gọi TA/mentor | Nhiều lần/buổi | Câu hỏi thường thiếu context: đang ở bước nào, lỗi gì, đã thử gì. |
-| 4 | TA/mentor | Câu hỏi của học viên | Hỏi lại context và trả lời thủ công | Ước lượng chờ 5-20 phút tùy tải | Bottleneck chính: TA/mentor là nguồn lực hữu hạn. |
-| 5 | TA/mentor + học viên | Câu trả lời thủ công | Học viên tiếp tục lab hoặc vẫn bị kẹt | Lặp lại với nhiều học viên | Nhiều câu hỏi giống nhau nhưng vẫn phải trả lời lại. |
-| 6 | Lớp học | Nhiều học viên hỏi cùng lúc | Lab chậm, mentor bị phân tán | Quan sát theo buổi | Ảnh hưởng completion rate và trải nghiệm học. |
+| 1 | Agent CSKH / hệ thống tổng đài | Cuộc gọi khách hàng | File ghi âm + metadata cuộc gọi | Hằng ngày, volume lớn | Đây là nguồn dữ liệu thô. |
+| 2 | QA / supervisor | Danh sách cuộc gọi | Chọn một mẫu nhỏ để kiểm tra | Thường chỉ kiểm được tỷ lệ thấp | Candidate nêu coverage dưới 5%. |
+| 3 | QA | File ghi âm | Nghe và ghi chú thủ công | Ước lượng 10-30 phút/call tùy độ dài | Bottleneck chính nằm ở bước nghe và ghi chú. |
+| 4 | QA | Ghi chú + rubric | Điểm QA theo tiêu chí | Lặp lại từng cuộc gọi | Dễ thiếu nhất quán giữa các QA nếu rubric không rõ. |
+| 5 | QA / supervisor | Điểm QA | Báo cáo lỗi, feedback, coaching | Theo ngày/tuần | Feedback đến agent bị trễ. |
+| 6 | Quản lý CSKH | Báo cáo QA mẫu nhỏ | Quyết định coaching/cải thiện quy trình | Theo kỳ báo cáo | Vì sample thấp nên nhiều rủi ro compliance/quality không được phát hiện. |
 
 Bottleneck chính:
 
 ```text
-Bottleneck nằm ở bước giải đáp thắc mắc real-time trong lab: học viên cần phản hồi ngay để tiếp tục thực hành, nhưng TA/mentor phải xử lý thủ công từng câu hỏi, trong đó có nhiều câu lặp lại hoặc có thể trả lời bằng tài liệu sẵn có.
+Bottleneck nằm ở bước QA phải nghe và chấm từng cuộc gọi thủ công. Đây là bước tốn thời gian tuyến tính theo số cuộc gọi, khiến tỷ lệ kiểm tra thấp và feedback cho agent bị chậm.
 ```
 
 ## Bước 5.2 — Future workflow bản nhóm
@@ -162,62 +151,62 @@ Bottleneck nằm ở bước giải đáp thắc mắc real-time trong lab: họ
 Dán workflow:
 
 ```text
-FUTURE STATE — Virtual TA pilot cho 1 bài lab
+FUTURE STATE — AI QA workflow cho transcript cuộc gọi CSKH
 
-[Học viên hỏi Virtual TA]
+[Cuộc gọi CSKH / transcript mẫu]
         |
         v
-[Rule phân loại: setup / thuật ngữ / lỗi code / ngoài scope]
+[Speech-to-text nếu input là audio]
         |
         v
-[RAG tìm trong lab guide + slide + FAQ]
+[Rule check: chào hỏi, xác minh, từ khóa compliance, lời cấm]
         |
         v
-[AI trả lời ngắn + nguồn tham chiếu + bước thử tiếp theo]
+[LLM chấm theo rubric + trích dẫn bằng chứng từ transcript]
         |
         v
-[Học viên thử lại trong lab]
+[Gắn nhãn: pass / fail / cần QA review]
         |
         +-------------------------------+
         |                               |
         v                               v
-[Resolved: ghi nhận feedback]   [Unresolved / low confidence]
-                                        |
-                                        v
-                         [Escalate TA kèm tóm tắt context]
+[QA review case rủi ro]       [Tự động tổng hợp insight]
+        |                               |
+        v                               v
+[Feedback cho agent]          [Dashboard lỗi phổ biến]
 
 Human boundary:
-- AI không làm hộ toàn bộ bài hoặc nộp code thay học viên.
-- AI không trả lời nếu không tìm thấy nguồn trong tài liệu lớp.
-- Câu hỏi khó, lỗi lạ, hoặc ảnh hưởng grading phải chuyển cho TA/mentor.
+- AI chỉ pre-score và gợi ý bằng chứng, không tự kỷ luật agent.
+- QA/supervisor là người duyệt cuối với cuộc gọi fail, low confidence hoặc liên quan compliance.
+- Dữ liệu phải được ẩn thông tin cá nhân trước khi dùng cho pilot.
 ```
 
 Before/after impact:
 
 | Metric | Trước | Sau kỳ vọng | Ghi chú |
 | :--- | ---: | ---: | :--- |
-| Số bước chính để học viên nhận hỗ trợ | 5-6 bước | 4-5 bước | Giảm vòng hỏi-chờ-hỏi lại context. |
-| Thời gian phản hồi đầu tiên | 5-20 phút | Dưới 1 phút cho câu hỏi phổ biến | Cần đo trong pilot, không coi là cam kết rollout. |
-| Số bước thủ công của TA/mentor | 3-4 bước | 1-2 bước | TA chỉ xử lý câu hỏi khó hoặc câu AI không chắc. |
-| Câu hỏi lặp lại gửi trực tiếp cho TA | Chưa đo; quan sát có nhiều câu/buổi | Giảm 30-50% trong nhóm câu hỏi setup/thuật ngữ phổ biến | Cần log câu hỏi trước và sau pilot. |
-| Tỷ lệ hoàn thành lab đúng giờ | Chưa có baseline chính thức | Tăng nhẹ 10-20% ở nhóm dùng Virtual TA | Chỉ đo sau khi có pilot 1 buổi. |
-| Risk mới | Thấp ở quy trình cũ nhưng chậm | AI có thể trả lời sai hoặc quá tự tin | Giảm rủi ro bằng nguồn tham chiếu, confidence, và handoff. |
+| Tỷ lệ cuộc gọi được QA | Dưới 5% theo candidate | 50-100% được AI pre-screen trong pilot dữ liệu mẫu | QA vẫn review các case rủi ro, không cần nghe toàn bộ. |
+| Thời gian QA thủ công/call | Ước lượng 10-30 phút | 3-7 phút cho case cần review | AI chuẩn bị transcript, điểm gợi ý và evidence. |
+| Số bước thủ công của QA | 5-6 bước | 2-3 bước | QA chuyển từ nghe toàn bộ sang kiểm chứng điểm và bằng chứng. |
+| Lỗi compliance/script bị bỏ sót | Chưa đo | Giảm nhờ quét toàn bộ transcript | Cần so sánh với QA người trên sample chuẩn. |
+| Tốc độ feedback cho agent | Theo ngày/tuần | Gần real-time hoặc cuối ngày | Phụ thuộc tích hợp hệ thống thật. |
+| Risk mới | QA chậm nhưng người kiểm soát trực tiếp | AI chấm sai, bias, hiểu nhầm transcript | Giảm bằng rubric rõ, confidence, human review, audit sample. |
 
 ## Bước 5.3 — Problem Statement v0
 
 | Field | Nội dung |
 | :--- | :--- |
-| **Actor** | Học viên đang làm lab, đặc biệt học viên trái ngành; TA/mentor là actor phụ bị quá tải support. |
-| **Workflow** | Trong lab, học viên gặp thuật ngữ/lỗi/setup, tự tra cứu, không giải được thì hỏi TA/mentor, chờ hỗ trợ, nhận câu trả lời thủ công rồi tiếp tục làm. |
-| **Bottleneck** | Bước giải đáp thắc mắc real-time phụ thuộc quá nhiều vào TA/mentor, trong khi nhiều câu hỏi có thể trả lời bằng tài liệu lớp hoặc FAQ. |
-| **Impact** | Học viên bị đứng tiến độ, không hoàn thành lab đúng giờ; TA/mentor bị phân tán bởi câu hỏi lặp lại; chất lượng buổi lab giảm. |
-| **Success Metric** | Giảm thời gian phản hồi đầu tiên cho câu hỏi phổ biến xuống dưới 1 phút; giảm 30-50% câu hỏi lặp lại gửi trực tiếp cho TA; tăng tỷ lệ hoàn thành lab đúng giờ sau pilot. |
-| **Boundary** | Chỉ xử lý 1 bài lab, các câu hỏi setup/thuật ngữ/lỗi phổ biến có trong tài liệu. Không làm hộ bài, không chấm điểm, không trả lời ngoài nguồn, không thay TA/mentor cho case khó. |
+| **Actor** | QA / quản lý CSKH cần kiểm tra chất lượng cuộc gọi; agent CSKH là người nhận feedback. |
+| **Workflow** | Mỗi ngày phát sinh nhiều cuộc gọi, QA chọn một mẫu nhỏ, nghe lại recording, ghi chú, chấm theo rubric, tổng hợp lỗi và feedback cho agent. |
+| **Bottleneck** | Bước nghe lại và chấm từng cuộc gọi thủ công tốn nhiều thời gian nên chỉ kiểm tra được tỷ lệ rất thấp. |
+| **Impact** | Nhiều cuộc gọi không được kiểm tra, lỗi compliance/script có thể bị bỏ sót, feedback cho agent chậm, quản lý thiếu dữ liệu để coaching và cải thiện chất lượng dịch vụ. |
+| **Success Metric** | Tăng tỷ lệ cuộc gọi được pre-screen từ dưới 5% lên ít nhất 50% trong pilot; giảm thời gian QA thủ công/call; phát hiện được lỗi script/compliance phổ biến; QA đánh giá độ hữu ích của AI score >= 4/5. |
+| **Boundary** | Pilot chỉ dùng transcript/recording đã được phép và ẩn thông tin cá nhân; chỉ chấm 5-7 tiêu chí rubric rõ; AI không tự đưa ra quyết định kỷ luật hoặc đánh giá cuối cùng. |
 
 Điểm còn cần kiểm ở v0:
 
 ```text
-Baseline chưa đủ chắc: cần đo số câu hỏi lặp lại, thời gian chờ TA, và completion rate trong ít nhất 1 buổi lab trước pilot.
+Baseline cần kiểm: số cuộc gọi/ngày, thời lượng trung bình, thời gian QA/call, rubric hiện tại, và tỷ lệ QA coverage thực tế. Nếu không có dữ liệu thật, pilot chỉ nên coi là proof-of-concept.
 ```
 
 ---
@@ -229,22 +218,22 @@ Baseline chưa đủ chắc: cần đo số câu hỏi lặp lại, thời gian 
 Bài toán của nhóm nằm ở ô nào?
 
 ```text
-Độ mơ hồ trung bình-cao, độ phức tạp trung bình.
+Độ mơ hồ trung bình, độ phức tạp trung bình-cao.
 ```
 
 Vì sao?
 
 ```text
-Câu hỏi của học viên có nhiều cách diễn đạt và thường thiếu context, nên không thể chỉ dùng keyword rule. Tuy vậy, workflow xử lý vẫn khá rõ: nhận câu hỏi, phân loại, truy xuất tài liệu, trả lời kèm nguồn, nhận feedback, escalates nếu không chắc. Vì vậy pilot nên là Workflow có RAG và rule handoff, chưa cần full Agent tự lập kế hoạch phức tạp.
+Một phần tiêu chí QA là rõ ràng và có thể rule-based, ví dụ có chào hỏi, có xác minh thông tin, có nói câu compliance bắt buộc hay không. Nhưng các tiêu chí như thái độ, mức độ giải quyết vấn đề, nguyên nhân khiếu nại cần hiểu ngữ cảnh transcript, nên cần AI hỗ trợ. Workflow gồm nhiều bước nối tiếp: transcribe, rule check, chấm rubric, trích evidence, QA review, tổng hợp insight. Vì vậy phù hợp nhất là Workflow, chưa cần Agent tự quyết định nhiều bước.
 ```
 
 ## Bước 6.1 — So sánh Rule / Workflow / Agent
 
 | Mức | Phương án cho bài toán nhóm | Khi nào đủ | Rủi ro | Chọn? |
 | :--- | :--- | :--- | :--- | :--- |
-| **Rule** | FAQ theo keyword: nếu câu hỏi chứa "API key", "cài môi trường", "deadline", "nộp bài" thì trả lời mẫu. | Đủ cho câu hỏi rất lặp lại, ít biến thể, câu trả lời cố định. | Không hiểu ngữ cảnh bài lab, dễ miss khi học viên diễn đạt khác, không giải thích được concept. | Không chọn làm mức chính; dùng làm guardrail/phân loại ban đầu. |
-| **Workflow** | Virtual TA workflow: phân loại câu hỏi, RAG trên slide/lab guide/FAQ, trả lời kèm nguồn, xin thêm context nếu thiếu, escalates cho TA khi không chắc. | Đủ cho pilot 1 bài lab với tài liệu rõ và nhóm câu hỏi phổ biến. | Phụ thuộc chất lượng tài liệu; vẫn có rủi ro hallucination nếu retrieval sai. | **Chọn cho pilot.** |
-| **Agent** | Agent có thể tự quyết định hỏi thêm, tìm nhiều nguồn, chạy tool kiểm tra lỗi, tạo checklist cá nhân hóa, theo dõi tiến độ từng học viên. | Hữu ích khi đã có data đầy đủ, nhiều loại tool, nhiều workflow phụ và owner vận hành. | Quá rộng cho lab hôm nay; rủi ro tự tin sai, khó debug, khó kiểm soát boundary. | Chưa chọn; để roadmap sau pilot. |
+| **Rule** | Keyword/script checker: kiểm có câu chào, xác minh thông tin, từ khóa cấm, câu compliance bắt buộc. | Đủ cho tiêu chí đúng/sai rõ ràng và ít phụ thuộc ngữ cảnh. | Bỏ sót khi agent diễn đạt khác keyword; không đánh giá được resolution, thái độ, nguyên nhân khiếu nại. | Dùng như một lớp trong workflow, không chọn độc lập. |
+| **Workflow** | STT hoặc transcript input -> rule check -> LLM chấm rubric -> trích evidence -> gắn confidence -> QA review case rủi ro -> dashboard insight. | Đủ cho pilot với 10-20 transcript và rubric 5-7 tiêu chí. | Phụ thuộc chất lượng transcript và rubric; AI có thể chấm sai nếu tiêu chí mơ hồ. | **Chọn cho pilot.** |
+| **Agent** | Agent tự lấy call từ hệ thống, đối chiếu CRM, mở ticket coaching, đề xuất action plan cho từng agent, theo dõi cải thiện sau training. | Hữu ích khi đã tích hợp tổng đài/CRM/LMS và có owner vận hành. | Quá rộng, nhiều rủi ro privacy/compliance, khó kiểm soát quyết định tự động. | Chưa chọn; để roadmap sau khi workflow chứng minh hiệu quả. |
 
 Mức chọn:
 
@@ -255,77 +244,76 @@ Workflow
 Vì sao chọn:
 
 ```text
-Workflow đủ để giải bottleneck chính trong phạm vi nhỏ: học viên cần câu trả lời nhanh, có nguồn, đúng context bài lab và có đường chuyển cho TA khi AI không chắc. Workflow cũng dễ đo hơn Agent: đo số câu hỏi, thời gian phản hồi, tỷ lệ resolved, tỷ lệ escalated và feedback hữu ích/không hữu ích.
+Workflow giải đúng bottleneck chính: giảm thời gian nghe và chấm thủ công bằng cách AI chuẩn bị transcript, điểm gợi ý và bằng chứng. QA vẫn là người duyệt cuối nên rủi ro thấp hơn Agent. Workflow cũng dễ đo bằng coverage, thời gian QA/call, tỷ lệ AI score được QA chấp nhận và số lỗi compliance phát hiện.
 ```
 
 Vì sao không chọn mức đơn giản hơn:
 
 ```text
-Rule-based FAQ chỉ xử lý được câu hỏi cố định. Trong lab, học viên thường mô tả lỗi/thuật ngữ bằng nhiều cách khác nhau, thiếu context hoặc hỏi theo bước đang làm. Vì vậy cần RAG để truy xuất đúng đoạn tài liệu và tạo câu trả lời theo ngữ cảnh.
+Rule chỉ xử lý được các tiêu chí cứng như keyword hoặc script bắt buộc. QA cuộc gọi cần đọc ngữ cảnh: khách hàng hỏi gì, agent có giải quyết đúng chưa, agent có làm khách hàng hiểu nhầm không. Vì vậy cần LLM trong workflow để chấm rubric kèm evidence.
 ```
 
 Vì sao chưa chọn Agent:
 
 ```text
-Agent đầy đủ chưa cần thiết cho pilot vì chưa có nhiều tool, chưa có dữ liệu tiến độ học viên, và chưa đủ guardrail để AI tự quyết định nhiều bước. Bắt đầu bằng Workflow giúp giảm rủi ro và vẫn đo được impact rõ.
+Agent chưa cần thiết vì pilot chưa tích hợp tổng đài, CRM, ticket coaching hoặc hệ thống nhân sự. Cho AI tự tạo action/kỷ luật agent là rủi ro cao. Trước mắt chỉ để AI pre-score và QA review.
 ```
 
 ## Bước 6.2 — Problem Statement v1
 
 | Field | Nội dung |
 | :--- | :--- |
-| **Actor** | Học viên đang làm lab trong bootcamp AI/coding, đặc biệt học viên trái ngành; TA/mentor là người review và xử lý escalation. |
-| **Workflow** | Khi làm lab, học viên gặp thuật ngữ, lỗi setup hoặc lỗi code phổ biến; hiện tại họ tự tra cứu hoặc chờ TA/mentor trả lời thủ công. |
-| **Bottleneck** | Bước support tuyến đầu trong lab bị nghẽn vì nhiều câu hỏi lặp lại và nhiều học viên cần phản hồi cùng lúc, trong khi TA/mentor là nguồn lực hữu hạn. |
-| **Impact** | Học viên bị đứng tiến độ, giảm tỷ lệ hoàn thành lab đúng giờ; TA/mentor mất thời gian với câu hỏi lặp lại thay vì hỗ trợ case khó; lớp học bị chậm nhịp. |
-| **Success Metric** | Trong pilot 1 bài lab: thời gian phản hồi đầu tiên cho câu hỏi phổ biến dưới 1 phút; ít nhất 50% câu hỏi setup/thuật ngữ phổ biến được Virtual TA xử lý mà không cần TA; giảm 30-50% câu hỏi lặp lại gửi trực tiếp cho TA; học viên đánh giá câu trả lời hữu ích >= 4/5. |
-| **Boundary** | Chỉ dùng tài liệu được duyệt: lab guide, slide, FAQ. Không làm hộ bài, không generate toàn bộ solution, không chấm điểm, không trả lời ngoài nguồn. Low confidence hoặc câu hỏi ảnh hưởng grading phải chuyển TA/mentor. |
-| **AI intervention point** | Sau khi học viên đặt câu hỏi và trước khi hỏi TA: AI phân loại intent, truy xuất tài liệu, trả lời ngắn kèm nguồn, đề xuất bước thử tiếp theo, hoặc escalates cho TA nếu thiếu context/không chắc. |
-| **Mức chọn** | Workflow: RAG QA + rule-based triage/escalation. |
-| **Rủi ro & người thật kiểm tra** | Rủi ro chính là hallucination, nguồn lỗi thời, trả lời làm hộ. TA/mentor kiểm tra bộ FAQ, review các câu bị downvote/escalated, cập nhật tài liệu sau mỗi buổi lab. |
+| **Actor** | QA / quản lý CSKH cần kiểm tra chất lượng cuộc gọi; agent CSKH nhận feedback/coaching. |
+| **Workflow** | Mỗi ngày có nhiều cuộc gọi CSKH, QA chỉ nghe được một mẫu nhỏ, chấm thủ công theo rubric rồi tổng hợp lỗi và feedback. |
+| **Bottleneck** | Nghe lại recording và chấm từng cuộc gọi là bước tốn thời gian nhất, khiến QA coverage thấp và feedback chậm. |
+| **Impact** | Lỗi compliance/script có thể bị bỏ sót; chất lượng tư vấn không được theo dõi đủ rộng; quản lý thiếu dữ liệu để coaching agent và cải thiện quy trình. |
+| **Success Metric** | Pilot với 10-20 transcript: AI pre-screen được 100% mẫu; QA chỉ cần review case fail/low confidence; giảm ít nhất 50% thời gian chấm/call trên sample; AI score được QA chấp nhận >= 80%; QA đánh giá insight hữu ích >= 4/5. |
+| **Boundary** | Không dùng dữ liệu có PII chưa ẩn danh. Không tự ra quyết định kỷ luật/thưởng phạt. Không chấm tiêu chí cảm xúc nếu không có bằng chứng trong transcript. Không thay QA final review. |
+| **AI intervention point** | Sau khi có transcript: AI kiểm rule, chấm rubric, trích evidence, gắn confidence, flag cuộc gọi rủi ro và tổng hợp lỗi phổ biến cho QA. |
+| **Mức chọn** | Workflow: STT/transcript + rule check + LLM scorecard + human review. |
+| **Rủi ro & người thật kiểm tra** | Rủi ro chính là transcript sai, rubric mơ hồ, AI chấm sai hoặc bias. QA/supervisor review case fail/low confidence, audit ngẫu nhiên case pass, và cập nhật rubric sau mỗi vòng pilot. |
 
 ## Bước 6.3 — Final decision
 
 | Câu hỏi | Yes / Not Yet / No | Ghi chú |
 | :--- | :--- | :--- |
-| Actor và workflow đã rõ chưa? | Yes | Actor chính là học viên làm lab; actor phụ là TA/mentor. Workflow trước-sau đã vẽ được. |
-| Baseline và success metric đã đo được chưa? | Not Yet | Có metric mục tiêu, nhưng cần đo baseline trong 1 buổi lab thật. |
-| Có data/input đủ dùng chưa? | Not Yet | Cần gom 1 lab guide, slide liên quan, FAQ setup, và 10-20 câu hỏi mẫu. |
-| Nếu AI sai, hậu quả có chấp nhận được không? | Yes, nếu có boundary | Chỉ cho phép trả lời trong phạm vi tài liệu; câu không chắc phải chuyển TA. |
-| Có người review/owner vận hành không? | Yes | TA/mentor là owner review câu trả lời lỗi và cập nhật FAQ. |
-| Có cách non-AI đơn giản hơn không? | Yes | FAQ/checklist có thể xử lý một phần, nhưng không đủ cho câu hỏi diễn đạt đa dạng và cần giải thích theo context lab. |
+| Actor và workflow đã rõ chưa? | Yes | Actor chính là QA/quản lý CSKH; workflow thủ công và workflow sau tối ưu đã rõ. |
+| Baseline và success metric đã đo được chưa? | Not Yet | Có baseline định tính "dưới 5%" từ candidate, nhưng cần số liệu thật về volume, thời gian QA/call và rubric hiện tại. |
+| Có data/input đủ dùng chưa? | Not Yet | Cần 10-20 transcript hoặc recording đã ẩn danh, cộng với rubric QA 5-7 tiêu chí. |
+| Nếu AI sai, hậu quả có chấp nhận được không? | Yes, nếu có human review | AI chỉ pre-score; QA duyệt cuối. Không dùng AI để tự động kỷ luật hoặc thưởng phạt agent. |
+| Có người review/owner vận hành không? | Yes | QA lead/supervisor là owner rubric, review output và calibration. |
+| Có cách non-AI đơn giản hơn không? | Yes | Có thể cải thiện bằng sampling tốt hơn, checklist/rubric rõ hơn, calibration QA. Nhưng non-AI không mở rộng coverage tốt bằng workflow AI. |
 
 Decision:
 
 ```text
-Go cho pilot nhỏ; Not Yet cho rollout toàn lớp nếu chưa đo baseline và chưa chuẩn hóa tài liệu.
+Go cho pilot nhỏ bằng transcript mẫu; Not Yet cho rollout production nếu chưa có dữ liệu thật, rubric chuẩn và quy trình privacy.
 ```
 
 Lý do:
 
 ```text
-Bài toán có actor, workflow, bottleneck và metric đủ rõ để thử nghiệm nhỏ. Tuy nhiên, quyết định Go chỉ áp dụng cho pilot giới hạn trong 1 bài lab, vì dữ liệu nguồn và baseline hiện tại chưa đủ chắc cho rollout rộng.
+Candidate #9 đáng chọn vì ít trùng, có KPI vận hành rõ, AI intervention nằm đúng bottleneck và có thể prototype trong lab bằng transcript. Tuy nhiên, đây là bài toán có rủi ro compliance/nhân sự nên chỉ Go ở mức pilot có human review, chưa Go cho tự động hóa hoàn toàn.
 ```
 
 Nếu Go, pilot nhỏ nhất là:
 
 ```text
-Làm Virtual TA cho 1 bài lab cụ thể trong 1 buổi:
-1. Input: lab guide, slide liên quan, FAQ setup, 10-20 câu hỏi mẫu.
-2. Scope: setup môi trường, thuật ngữ trong bài, lỗi phổ biến đã có trong tài liệu.
-3. Output: câu trả lời ngắn, nguồn tham chiếu, bước thử tiếp theo, nút "hỏi TA".
-4. Đo: số câu hỏi, thời gian phản hồi, tỷ lệ resolved, tỷ lệ escalated, feedback hữu ích 1-5, số câu hỏi lặp lại gửi trực tiếp cho TA.
+Làm AI QA prototype cho 10-20 transcript cuộc gọi CSKH:
+1. Input: transcript ẩn danh, metadata tối thiểu, rubric QA 5-7 tiêu chí.
+2. AI output: điểm từng tiêu chí, pass/fail, evidence quote, confidence, lý do cần QA review.
+3. Human review: QA so sánh AI score với điểm người chấm.
+4. Đo: thời gian chấm/call, tỷ lệ AI score được QA chấp nhận, số lỗi phát hiện, mức hữu ích 1-5.
 ```
 
 Nếu Not Yet, cần validate gì trước:
 
 ```text
-Trước rollout rộng cần validate: baseline thời gian chờ TA, tỷ lệ câu hỏi lặp lại, chất lượng tài liệu nguồn, mức độ học viên sẵn sàng hỏi Virtual TA trước khi hỏi người thật.
+Trước rollout cần validate: quyền dùng dữ liệu cuộc gọi, quy trình ẩn danh PII, rubric QA đủ rõ, transcript quality, baseline QA coverage, và mức đồng thuận giữa QA người với AI score.
 ```
 
 Nếu No-Go, nên làm gì thay AI:
 
 ```text
-Nếu pilot cho thấy phần lớn pain đến từ tài liệu mở trễ hoặc học viên chưa đọc prerequisite, nên ưu tiên process fix: mở tài liệu sớm hơn, checklist trước buổi học, FAQ setup, và office hour ngắn trước lab.
+Nếu không có quyền dùng dữ liệu hoặc rubric chưa ổn, làm non-AI trước: chuẩn hóa scorecard, sampling theo rủi ro, checklist compliance, calibration giữa các QA và template feedback cho agent.
 ```
-
