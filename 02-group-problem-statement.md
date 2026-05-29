@@ -41,10 +41,10 @@ Chấm 1-5. Điểm không cần tuyệt đối; mục tiêu là ép nhóm nói 
 
 | Candidate | Actor rõ | Workflow rõ | Pain có evidence | Impact đo được | Làm trong lab | So sánh R/W/A được | Nhóm hiểu domain | Tổng |
 | :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Cluster A — Hỗ trợ học tập: Virtual TA / AI tutor trong lab (#3, #4, #5) | 5 | 5 | 4 | 5 | 5 | 5 | 5 | 34 |
+| Cluster A — Hỗ trợ học tập: Virtual TA / AI tutor trong lab (#3, #4, #5) | 5 | 5 | 3 | 5 | 4 | 4 | 4 | 30 |
 | Cluster B — Tiếp thu kiến thức: học viên không kịp nạp kiến thức trước/trong lab (#1, #2) | 5 | 4 | 4 | 4 | 4 | 4 | 5 | 30 |
 | Cluster C — Giao tiếp & thông báo: gom luồng thông tin nhiều kênh (#6) | 5 | 4 | 3 | 4 | 4 | 5 | 4 | 29 |
-| Cluster D — Vận hành B2B: xử lý dữ liệu phi cấu trúc thủ công bằng OCR/STT + AI (#7, #8, #9) | 4 | 5 | 3 | 5 | 2 | 5 | 2 | 26 |
+| Cluster D — Vận hành B2B: xử lý dữ liệu phi cấu trúc thủ công bằng OCR/STT + AI (#7, #8, #9) | 4 | 5 | 5 | 5 | 2 | 5 | 5 | 31 |
 
 Candidate nhóm chọn:
 
