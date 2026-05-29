@@ -50,7 +50,7 @@ Về AI, candidate này có AI-fit mạnh nhưng vẫn kiểm soát được: Ru
 Vì sao không chọn các candidate còn lại:
 
 ```text
-#4 có điểm rất cao nhưng dễ trùng với nhiều nhóm khác vì bài toán Virtual TA trong lab khá phổ biến. Ngoài ra impact cần đo qua hành vi học viên và adoption, không trực tiếp ra KPI vận hành như QA cuộc gọi.
+#4 Impact cần đo qua hành vi học viên và adoption, không trực tiếp ra KPI vận hành như QA cuộc gọi.
 
 #7 có ROI rõ nhưng cần quy chế công tác phí và hóa đơn mẫu đủ thật. Nếu thiếu dữ liệu, bài toán dễ biến thành demo OCR chung chung.
 
@@ -105,7 +105,6 @@ Thị trường đã có các pattern rõ cho automated QA trong contact center:
 
 ## Bước 5.1 — Current workflow bản nhóm
 
-Dán workflow:
 
 ```text
 CURRENT STATE — QA cuộc gọi CSKH thủ công
@@ -148,7 +147,6 @@ Bottleneck nằm ở bước QA phải nghe và chấm từng cuộc gọi thủ
 
 ## Bước 5.2 — Future workflow bản nhóm
 
-Dán workflow:
 
 ```text
 FUTURE STATE — AI QA workflow cho transcript cuộc gọi CSKH

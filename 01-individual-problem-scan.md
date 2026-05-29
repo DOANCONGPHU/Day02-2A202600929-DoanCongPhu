@@ -67,6 +67,7 @@ Gửi video/tóm tắt kiến thức nền trước giờ học
 AI có thể tự động tạo recap/prerequisite ngắn từ slide hoặc lab
 AI recommend phần cần đọc trước dựa trên trình độ học viên
 AI chatbot giải thích nhanh thuật ngữ trước buổi học
+
 **Quick gut:**  
 [x] Workflow
 [x] Agent
@@ -110,7 +111,7 @@ AI chatbot giải thích nhanh thuật ngữ trước buổi học
                   v
         [Chất lượng buổi học giảm]
 ```
-# Problem 2
+# Problem #2
 
 Problem :
 Học viên trái ngành không load kịp kiến thức khi học lab do tốc độ học và độ khó tăng quá nhanh.
@@ -120,12 +121,12 @@ Học viên trái ngành không load kịp kiến thức khi học lab do tốc 
 * Học viên trái ngành
 
 
-Thời điểm / bối cảnh:
+**Thời điểm / bối cảnh:**
 
 * Trong các buổi lab chiều hoặc các buổi kiến thức chuyên sâu
 * Đặc biệt sau 1-2 tuần đầu của khóa học
 
-Current workflow 3-7 bước:
+**Current workflow 3-7 bước:**
 
 1. Học viên học kiến thức nền cơ bản
 2. Vào buổi lab chuyên sâu
@@ -135,45 +136,45 @@ Current workflow 3-7 bước:
 6. Học viên bị mất nhịp
 7. Phải hỏi mentor liên tục hoặc bỏ dở lab
 
-Bottleneck:
+**Bottleneck:**
 
 * Chênh lệch lớn giữa kiến thức đầu vào và độ khó thực tế
 * Người trái ngành thiếu context IT/workflow thực tế
 
-Impact:
+**Impact:**
 
 * Học viên bị quá tải
 * Không hoàn thành lab đúng giờ
 * Mentor bị overload support
 * Một số học viên mất động lực hoặc bỏ cuộc
 
-Success metric:
+**Success metric:**
 
 * Tăng số học viên hoàn thành lab đúng giờ
 * Giảm số câu hỏi cơ bản lặp lại
 * Giảm số học viên bị “mất flow” giữa buổi
 * Tăng self-report confidence của học viên
 
-Non-AI alternative:
+**Non-AI alternative:**
 
 * Chia lớp theo level
 * Có lớp foundation trước khóa chính
 * Giảm tốc độ hoặc chia nhỏ lab
 
-AI hypothesis:
+**AI hypothesis:**
 
 * AI detect học viên đang “kẹt” ở bước nào
 * AI giải thích lại concept theo level người học
 * AI generate roadmap/prerequisite cá nhân hóa
 
-Quick gut:
+**Quick gut:**
 [ ] No AI / process fix
 [ ] Rule
 [x] Workflow
 [x] Agent
 [ ] Chưa biết
 
-ASCII Flow:
+**ASCII Flow:**
 
 ```text
 [Học kiến thức nền cơ bản]
@@ -202,23 +203,23 @@ ASCII Flow:
                v
       [Mất động lực học]
 ```
-# Problem 3
+# Problem #3
 
-Problem 1 câu:
+**Problem 1 câu:**
 Không có AI tutor hỗ trợ recap kiến thức nền hoặc giải thích nhanh thuật ngữ khiến mentor phải trả lời lặp lại nhiều lần.
 
-Actor:
+**Actor:**
 
 * Học viên trái ngành
 * Mentor
 
-Thời điểm / bối cảnh:
+**Thời điểm / bối cảnh:**
 
 * Trong lúc học lab
 * Khi gặp thuật ngữ mới hoặc lỗi kỹ thuật
 * Sau giờ học khi tự học lại
 
-Current workflow 3-7 bước:
+**Current workflow 3-7 bước:**
 
 1. Học viên gặp thuật ngữ/concept mới
 2. Không hiểu nhưng flow lớp vẫn tiếp tục
@@ -228,45 +229,45 @@ Current workflow 3-7 bước:
 6. Mentor bị phân tán thời gian support
 7. Học viên vẫn khó hiểu nếu giải thích quá technical
 
-Bottleneck:
+**Bottleneck:**
 
 * Không có hệ thống hỗ trợ giải thích theo trình độ người học
 * Mentor phải trả lời lặp lại nhiều câu giống nhau
 
-Impact:
+**Impact:**
 
 * Mentor quá tải support
 * Học viên phụ thuộc mentor
 * Flow lớp học bị gián đoạn
 * Người yếu ngày càng chậm hơn
 
-Success metric:
+**Success metric:**
 
 * Giảm số câu hỏi lặp lại cho mentor
 * Tăng tốc độ tự giải quyết vấn đề của học viên
 * Tăng completion rate của lab
 * Học viên phản hồi hiểu bài tốt hơn
 
-Non-AI alternative:
+**Non-AI alternative:**
 
 * FAQ/document tổng hợp
 * Video recap kiến thức nền
 * Session phụ đạo ngoài giờ
 
-AI hypothesis:
+**AI hypothesis:**
 
 * AI tutor có thể explain concept theo nhiều level
 * AI trả lời dựa trên context bài lab hiện tại
 * AI recap nhanh kiến thức prerequisite khi học viên bị kẹt
 
-Quick gut:
+**Quick gut:**
 [ ] No AI / process fix
 [ ] Rule
 [ ] Workflow
 [x] Agent
 [ ] Chưa biết
 
-ASCII Flow:
+**ASCII Flow:**
 
 ```text
  [Học viên gặp thuật ngữ mới]
