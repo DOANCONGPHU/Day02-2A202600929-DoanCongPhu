@@ -124,7 +124,7 @@ Học viên trái ngành không load kịp kiến thức khi học lab do tốc 
 **Thời điểm / bối cảnh:**
 
 * Trong các buổi lab chiều hoặc các buổi kiến thức chuyên sâu
-* Đặc biệt sau 1-2 tuần đầu của khóa học
+* Đặc biệt sau 1-6 tuần đầu của khóa học
 
 **Current workflow:**
 
@@ -187,7 +187,6 @@ CURRENT STATE — 90 phút trong buổi lab chuyên sâu
 * AI generate roadmap/prerequisite cá nhân hóa
 
 **Quick gut:**
-Workflow
 Agent
 
 ### Draft future workflow
@@ -221,7 +220,7 @@ Không có AI tutor hỗ trợ recap kiến thức nền hoặc giải thích nh
 **Actor:**
 
 * Học viên trái ngành
-* Mentor
+* Mentor bị quá tải support
 
 **Thời điểm / bối cảnh:**
 
